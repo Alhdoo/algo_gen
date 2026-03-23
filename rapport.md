@@ -49,3 +49,4 @@ Explication:
 6. On remplace la solution courante si elle est meilleure.
 7. Pour favoriser l'exploration, on garde parfois une solution moins bonne avec une faible probabilité.
 
+C'est notre propre algorithme qui est décrit ici, que nous avons également effectué quelques tests avec Codex 5.4 High

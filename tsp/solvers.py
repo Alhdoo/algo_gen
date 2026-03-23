@@ -74,8 +74,6 @@ def hunger_game_random_solver(instance: InstanceData) -> list[int]:
 
     return solution
 
-
-
 def best_of_random_solver(instance: InstanceData) -> list[int]:
     out_of: int = 100_000
 
@@ -107,7 +105,6 @@ def best_of_random_solver(instance: InstanceData) -> list[int]:
 
     return solution
 
-
 def swap_random_solver(instance: InstanceData) -> list[int]:
     iterations: int = 100_000
 
@@ -134,7 +131,6 @@ def swap_random_solver(instance: InstanceData) -> list[int]:
             solution_score = score
 
     return solution
-
 
 def best_of_random_solver_with_escape(instance: InstanceData) -> list[int]:
     iterations: int = 100_000
@@ -178,7 +174,7 @@ def best_of_random_solver_with_escape(instance: InstanceData) -> list[int]:
     return best
 
 def best_of_random_solver_section(instance: InstanceData) -> list[int]:
-    iterations: int = 100_000
+    iterations: int = 1000000
 
     # Initial solution
     current = random_solver(instance)
