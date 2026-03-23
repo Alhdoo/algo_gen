@@ -91,7 +91,7 @@ def solve_instance(client: TSPClient, instance_id: str, solver_name: str) -> tup
     if not valid:
         raise RuntimeError(f"Invalid tour from solver '{solver_name}': {reason}")
 
-    distance = tour_distance_km(instance.cities, tour)
+    distance = tour_distance_km(instance.cities, tour, instance.instance_id)
     return tour, distance
 
 

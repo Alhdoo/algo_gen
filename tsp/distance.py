@@ -20,15 +20,41 @@ def haversine_km(city_a: tuple[float, float], city_b: tuple[float, float]) -> fl
     return 2 * EARTH_RADIUS_KM * asin(sqrt(a))
 
 
-def tour_distance_km(cities: list[tuple[float, float]], tour: list[int]) -> float:
-    """Compute total tour distance, including return to starting city."""
+def euclidean_km(city_a: tuple[float, float], city_b: tuple[float, float]) -> float:
+    """Compute Euclidean distance using Pythagoras on (lon, lat) coordinates."""
+    lon_a, lat_a = city_a
+    lon_b, lat_b = city_b
+    dx = lon_b - lon_a
+    dy = lat_b - lat_a
+    return sqrt(dx * dx + dy * dy)
+
+
+def should_use_euclidean(instance_id: str | None) -> bool:
+    """Use Euclidean distance for synthetic hard datasets."""
+    if not instance_id:
+        return False
+    return instance_id.startswith("hard")
+
+
+def tour_distance_km(
+    cities: list[tuple[float, float]],
+    tour: list[int],
+    instance_id: str | None = None,
+) -> float:
+    """Compute total tour distance, including return to starting city.
+
+    For instance ids starting with "hard", Euclidean distance is used.
+    Otherwise, Haversine distance is used.
+    """
     if not tour:
         return 0.0
+
+    edge_distance = euclidean_km if should_use_euclidean(instance_id) else haversine_km
 
     total = 0.0
     n = len(tour)
     for i in range(n):
         a = cities[tour[i]]
         b = cities[tour[(i + 1) % n]]
-        total += haversine_km(a, b)
+        total += edge_distance(a, b)
     return total
